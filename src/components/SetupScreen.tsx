@@ -55,7 +55,7 @@ const SetupScreen = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl mb-12">
         <AnimatePresence>
-          {teamList.map((team, index) => (
+          {teamList.map((team, _index) => (
             <motion.div
               key={team.id}
               initial={{ opacity: 0, scale: 0.8 }}

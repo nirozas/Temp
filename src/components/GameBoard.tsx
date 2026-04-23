@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { useGameStore } from '../store/useGameStore';
 import { motion } from 'framer-motion';
 import { PlayCircle } from 'lucide-react';

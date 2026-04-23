@@ -51,20 +51,10 @@ export const useGameStore = create<GameStore>((set) => ({
     };
   }),
 
-  completeTurn: (success) => set((state) => {
-    const currentTeam = state.teams[state.currentTeamIndex];
-    let steps = 0;
-    if (success && state.selectedDifficulty) {
-      if (state.selectedDifficulty === 'Easy') steps = 1;
-      else if (state.selectedDifficulty === 'Medium') steps = 2;
-      else if (state.selectedDifficulty === 'Hard') steps = 3;
-    }
-
-    return {
-      lastTurnResult: success ? 'SUCCESS' : 'FAIL',
-      phase: 'RESOLUTION',
-      // We don't advance the turn index yet, we do it after resolution animation
-    };
+  completeTurn: (success) => set({
+    lastTurnResult: success ? 'SUCCESS' : 'FAIL',
+    phase: 'RESOLUTION',
+    // We don't advance the turn index yet, we do it after resolution animation
   }),
 
   nextTurn: () => set((state) => {

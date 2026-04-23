@@ -6,7 +6,7 @@ import TurnModal from './components/TurnModal';
 import DrawingPhase from './components/DrawingPhase';
 import ResolutionScreen from './components/ResolutionScreen';
 import WinnerScreen from './components/WinnerScreen';
-import type { GamePhase } from './types/game';
+
 
 const App = () => {
   const { phase } = useGameStore();

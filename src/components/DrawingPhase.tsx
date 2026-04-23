@@ -9,7 +9,7 @@ const DrawingPhase = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [color, setColor] = useState('#ffffff');
-  const [lineWidth, setLineWidth] = useState(5);
+  const [lineWidth] = useState(5);
   const [mode, setMode] = useState<'pen' | 'eraser'>('pen');
   const [timeLeft, setTimeLeft] = useState(Math.max(10, 60 - timePenalty));
   const [showRef, setShowRef] = useState(false);

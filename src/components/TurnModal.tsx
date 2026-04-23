@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useGameStore } from '../store/useGameStore';
-import { CATEGORIES, getRandomWord } from '../data/words';
+import { getRandomWord } from '../data/words';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, RefreshCw, Image, X, AlertTriangle } from 'lucide-react';
 import type { Difficulty } from '../types/game';
