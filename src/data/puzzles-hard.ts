@@ -133,7 +133,7 @@ export const hardPuzzles: Puzzle[] = [
   {
     id: 'hard-mythology-1',
     title: 'Greek Mythology',
-    ageGroup: '15-18',
+    ageGroup: '18+',
     difficulty: 'hard',
     gridSize: 13,
     theme: 'Mythology',

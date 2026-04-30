@@ -1,10 +1,14 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
+import { X, ExternalLink, Brain, Calculator } from 'lucide-react';
 import { useStore } from '../store/useStore';
 import { CATEGORY_GRADIENTS } from '../config/themes';
 
 export default function FunFactOverlay() {
   const { showFunFact, closeFunFact } = useStore();
+
+  if (!showFunFact) return null;
+
+  const { funFact } = showFunFact;
 
   return (
     <AnimatePresence>
@@ -17,7 +21,7 @@ export default function FunFactOverlay() {
           exit={{ opacity: 0 }}
         >
           <motion.div
-            className={`relative w-full max-w-sm rounded-3xl p-6 bg-gradient-to-br ${CATEGORY_GRADIENTS[showFunFact.funFact.category] ?? 'from-indigo-500 to-purple-700'} shadow-2xl`}
+            className={`relative w-full max-w-sm rounded-3xl p-6 bg-gradient-to-br ${CATEGORY_GRADIENTS[funFact.category] ?? 'from-indigo-500 to-purple-700'} shadow-2xl overflow-y-auto max-h-[90vh]`}
             initial={{ scale: 0.5, rotateY: 90, opacity: 0 }}
             animate={{ scale: 1, rotateY: 0, opacity: 1 }}
             exit={{ scale: 0.5, opacity: 0 }}
@@ -38,7 +42,7 @@ export default function FunFactOverlay() {
               transition={{ delay: 0.2, type: 'spring', stiffness: 300 }}
               style={{ fontSize: 64 }}
             >
-              {showFunFact.funFact.emoji}
+              {funFact.emoji}
             </motion.div>
 
             <motion.h2
@@ -56,7 +60,7 @@ export default function FunFactOverlay() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              {showFunFact.funFact.category}
+              {funFact.category}
             </motion.p>
 
             <motion.div
@@ -66,30 +70,66 @@ export default function FunFactOverlay() {
               transition={{ delay: 0.5 }}
             >
               <p className="text-white font-semibold text-sm leading-relaxed">
-                {showFunFact.funFact.funFact}
+                {funFact.funFact}
               </p>
             </motion.div>
+
+            {funFact.formula && (
+               <motion.div
+                className="bg-black/20 rounded-2xl p-4 mb-3 border border-white/10"
+                initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.6 }}
+               >
+                 <p className="text-white/60 text-[10px] font-bold uppercase mb-1 flex items-center gap-1">
+                   <Calculator size={12} /> Formula
+                 </p>
+                 <p className="text-white font-mono text-center py-1">{funFact.formula}</p>
+               </motion.div>
+            )}
+
+            {funFact.criticalThinking && (
+               <motion.div
+                className="bg-amber-500/20 rounded-2xl p-4 mb-3 border border-amber-500/30"
+                initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.7 }}
+               >
+                 <p className="text-amber-200 text-[10px] font-bold uppercase mb-1 flex items-center gap-1">
+                   <Brain size={12} /> Why it matters today
+                 </p>
+                 <p className="text-white text-sm italic">{funFact.criticalThinking}</p>
+               </motion.div>
+            )}
 
             <motion.div
               className="bg-white/10 rounded-2xl p-4"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.65 }}
-            >
-              <p className="text-white/60 text-xs font-bold uppercase mb-1">Did you know?</p>
-              <p className="text-white text-sm leading-relaxed">{showFunFact.funFact.didYouKnow}</p>
-            </motion.div>
-
-            <motion.button
-              onClick={closeFunFact}
-              className="mt-4 w-full bg-white/20 hover:bg-white/30 text-white font-bold py-3 rounded-2xl transition-all"
-              whileTap={{ scale: 0.96 }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
               transition={{ delay: 0.8 }}
             >
-              Awesome! ⭐
-            </motion.button>
+              <p className="text-white/60 text-xs font-bold uppercase mb-1">Did you know?</p>
+              <p className="text-white text-sm leading-relaxed">{funFact.didYouKnow}</p>
+            </motion.div>
+
+            <div className="flex gap-2 mt-4">
+              {funFact.deepDiveUrl && (
+                <motion.a
+                  href={funFact.deepDiveUrl} target="_blank" rel="noopener noreferrer"
+                  className="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 rounded-2xl transition-all text-center flex items-center justify-center gap-2"
+                  whileTap={{ scale: 0.96 }}
+                  initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }}
+                >
+                  <ExternalLink size={18} /> Deep Dive
+                </motion.a>
+              )}
+              <motion.button
+                onClick={closeFunFact}
+                className={`${funFact.deepDiveUrl ? 'flex-1' : 'w-full'} bg-white/20 hover:bg-white/30 text-white font-bold py-3 rounded-2xl transition-all`}
+                whileTap={{ scale: 0.96 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.0 }}
+              >
+                Awesome! ⭐
+              </motion.button>
+            </div>
           </motion.div>
         </motion.div>
       )}

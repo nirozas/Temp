@@ -31,6 +31,9 @@ export interface FunFactCard {
   imageDescription: string;
   category: string;
   difficulty: Difficulty;
+  deepDiveUrl?: string;
+  formula?: string;
+  criticalThinking?: string;
 }
 
 export interface CrosswordWord {
