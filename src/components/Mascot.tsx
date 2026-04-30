@@ -10,7 +10,7 @@ const EXPRESSIONS: Record<MascotState, string> = {
   surprised: '😲',
 };
 
-const VARIANTS: Record<MascotState, object> = {
+const VARIANTS: Record<MascotState, any> = {
   idle: { y: [0, -8, 0], transition: { duration: 3, repeat: Infinity, ease: 'easeInOut' } },
   happy: { rotate: [-5, 5, -5, 0], scale: [1, 1.15, 1], transition: { duration: 0.6 } },
   thinking: { rotate: [0, 10, 0], transition: { duration: 1.2, repeat: Infinity } },
